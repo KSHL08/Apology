@@ -1,0 +1,360 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --bg1: #fde2e4;
+  --bg2: #e2ece9;
+  --bg3: #dfe7fd;
+  --ink: #4a3f4f;
+  --soft: #7b6d80;
+  --pink: #ff6b8b;
+  --pink-dark: #e04e72;
+  --card: rgba(255, 255, 255, 0.82);
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  font-family: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+  color: var(--ink);
+  background: linear-gradient(135deg, var(--bg1), var(--bg3), var(--bg2));
+  background-size: 300% 300%;
+  animation: bgShift 14s ease infinite;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+@keyframes bgShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.page {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Falling petals */
+.petals {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.petals span {
+  position: absolute;
+  top: -40px;
+  animation: fall linear forwards;
+  opacity: 0.8;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0.2;
+  }
+}
+
+/* Card */
+.card {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 460px;
+  min-height: 420px;
+  background: var(--card);
+  backdrop-filter: blur(8px);
+  border-radius: 24px;
+  padding: 28px 22px;
+  box-shadow: 0 14px 40px rgba(120, 80, 110, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.screen {
+  display: none;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.screen.active {
+  display: flex;
+  animation: pop 0.45s ease;
+}
+
+@keyframes pop {
+  from { opacity: 0; transform: translateY(14px) scale(0.97); }
+  to { opacity: 1; transform: none; }
+}
+
+h1, h2 {
+  margin: 0;
+  line-height: 1.25;
+}
+
+h1 { font-size: 1.9rem; }
+h2 { font-size: 1.6rem; }
+
+.subtitle {
+  margin: 0;
+  color: var(--soft);
+}
+
+.face {
+  font-size: 2.6rem;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  50% { transform: translateY(-8px); }
+}
+
+/* Buttons */
+.btn {
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 12px 24px;
+  border-radius: 999px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+}
+
+.btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.btn.primary {
+  background: linear-gradient(135deg, var(--pink), var(--pink-dark));
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(224, 78, 114, 0.35);
+}
+
+.btn.ghost {
+  background: #fff;
+  color: var(--soft);
+  border: 1px solid #e6d9e3;
+}
+
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+
+.forgive-actions {
+  position: relative;
+  width: 100%;
+  min-height: 150px;
+  align-items: flex-start;
+}
+
+.message {
+  margin: 0;
+  min-height: 1.4em;
+  color: var(--pink-dark);
+  font-weight: 600;
+}
+
+/* Reasons */
+.reason-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 10px;
+  width: 100%;
+}
+
+.reason-btn {
+  background: #fff;
+  border: 2px solid #f6d3dc;
+  border-radius: 16px;
+  padding: 14px 8px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  color: var(--ink);
+  transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.reason-btn:hover {
+  transform: translateY(-2px);
+}
+
+.reason-btn .emoji {
+  display: block;
+  font-size: 1.8rem;
+  margin-bottom: 4px;
+}
+
+.reason-btn.opened {
+  background: #fff0f3;
+  border-color: var(--pink);
+}
+
+.reason-text {
+  margin: 0;
+  min-height: 3em;
+  color: var(--ink);
+  font-style: italic;
+}
+
+/* Promises */
+.promise-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.promise-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #fff;
+  border: 2px solid #f6d3dc;
+  border-radius: 14px;
+  padding: 12px 14px;
+  cursor: pointer;
+  text-align: left;
+  font-size: 0.98rem;
+  color: var(--ink);
+  width: 100%;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.promise-item .box {
+  flex: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid #e6b8c6;
+  display: grid;
+  place-items: center;
+  font-size: 0.8rem;
+  color: transparent;
+  transition: all 0.2s ease;
+}
+
+.promise-item.checked {
+  background: #fff0f3;
+  border-color: var(--pink);
+}
+
+.promise-item.checked .box {
+  background: var(--pink);
+  border-color: var(--pink);
+  color: #fff;
+}
+
+/* Letter */
+.letter {
+  background: #fffaf5;
+  border: 1px solid #f0e0d0;
+  border-radius: 14px;
+  padding: 20px 18px;
+  width: 100%;
+  text-align: left;
+  line-height: 1.7;
+  box-shadow: inset 0 0 20px rgba(240, 210, 180, 0.25);
+}
+
+.letter p {
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+.letter-heart {
+  text-align: right;
+  color: var(--pink);
+  font-size: 1.4rem;
+  margin-top: 8px;
+  animation: beat 1.2s ease infinite;
+}
+
+@keyframes beat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.25); }
+}
+
+/* Music button */
+.music-btn {
+  position: fixed;
+  top: 14px;
+  right: 14px;
+  z-index: 5;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.9);
+  font-size: 1.2rem;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+}
+
+.music-btn[hidden] {
+  display: none;
+}
+
+/* Confetti */
+.confetti {
+  position: fixed;
+  width: 10px;
+  height: 14px;
+  z-index: 10;
+  pointer-events: none;
+  animation: confettiFall 3s ease-in forwards;
+}
+
+@keyframes confettiFall {
+  to {
+    transform: translateY(110vh) rotate(720deg);
+    opacity: 0.6;
+  }
+}
+
+.footer {
+  text-align: center;
+  padding: 12px;
+  color: var(--soft);
+  font-size: 0.9rem;
+}
+
+@media (max-width: 420px) {
+  h1 { font-size: 1.6rem; }
+  h2 { font-size: 1.4rem; }
+  .card { padding: 22px 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
