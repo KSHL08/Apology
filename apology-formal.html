@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>A Sincere Apology</title>
+    <link rel="stylesheet" href="apology-formal.css" />
+  </head>
+  <body>
+    <main class="page">
+      <article class="letter" id="letter">
+        <header class="letter-head">
+          <p class="eyebrow">A Sincere Apology</p>
+          <h1 id="subject"></h1>
+          <p class="date" id="letterDate"></p>
+        </header>
+
+        <p class="salutation" id="salutation"></p>
+
+        <div id="sections"></div>
+
+        <p class="closing" id="closing"></p>
+        <p class="signature" id="signature"></p>
+
+        <div class="actions no-print">
+          <button id="printBtn" class="btn" type="button">Print / Save as PDF</button>
+          <button id="copyBtn" class="btn secondary" type="button">Copy text</button>
+        </div>
+        <p id="status" class="status no-print" aria-live="polite"></p>
+      </article>
+    </main>
+
+    <script src="apology-formal.js"></script>
+  </body>
+</html>
